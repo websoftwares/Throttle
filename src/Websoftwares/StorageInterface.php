@@ -6,7 +6,7 @@ namespace Websoftwares;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.1
+ * @version 0.2
  * @author boris <boris@websoftwar.es>
  */
 interface StorageInterface
@@ -14,16 +14,16 @@ interface StorageInterface
     /**
      * save
      *
-     * @param string $ip       adress to save
-     * @param int    $amount   the current amount
-     * @param int    $timespan the timespan in seconds
+     * @param mixed $identifier identifier to save
+     * @param int   $amount     the current amount
+     * @param int   $timespan   the timespan in seconds
     */
-    public function save($ip, $amount, $timespan);
+    public function save($identifier, $amount, $timespan);
 
     /**
      * increment
      *
-     * @param int $ip adress to increment the value for
+     * @param mixed $identifier identifier to increment the value for
      */
-    public function increment($ip);
+    public function increment($identifier);
 }

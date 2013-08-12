@@ -3,14 +3,14 @@ namespace Websoftwares;
 use Psr\Log\LoggerInterface, Websoftwares\StorageInterface;
 /**
  * Throttle class
- * Ban ip-adress after certain amount of requests in a given timeframe.
+ * Ban identifier after certain amount of requests in a given timeframe.
  *
  * Converted from python example and comments from below link.
  * @link https://forrst.com/posts/Limiting_number_of_requests_in_a_given_timeframe-0BW
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.1
+ * @version 0.2
  * @author Boris <boris@websoftwar.es>
  */
 class Throttle
@@ -51,8 +51,8 @@ class Throttle
         // The options
         $this->options = array_merge(
             array(
-                'banned' => 5, // Ban ip after 5 attempts
-                'logged' => 10, // Log ip after 10 attempts
+                'banned' => 5, // Ban identifier after 5 attempts
+                'logged' => 10, // Log identifier after 10 attempts
                 'timespan' => '86400' // The timespan in seconds for ban
                 ),
             $options
@@ -62,31 +62,26 @@ class Throttle
     /**
      * validate
      *
-     * @param  string  $ip
+     * @param  mixed   $identifier
      * @return boolean
      */
-    public function validate($ip = null)
+    public function validate($identifier = null)
     {
-        // No ip
-        if (!$ip) {
-            throw new \InvalidArgumentException('ip is a required argument');
-        }
-
-        // Invalid Ip
-        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-            throw new \InvalidArgumentException($ip .  ' is an invalid ip');
+        // No identifier
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
         }
 
         // Current attempts
-        $attempts = $this->storage->increment($ip);
+        $attempts = $this->storage->increment($identifier);
 
         // No attempts
         if (! $attempts) {
-            $this->storage->save($ip, 1, $this->options['timespan']);
+            $this->storage->save($identifier, 1, $this->options['timespan']);
 
         // Logged
         } elseif ($attempts == $this->options['logged']) {
-            $this->logger->log('warning', $ip . ' exceeded the number of allowed requests');
+            $this->logger->log('warning', $identifier . ' exceeded the number of allowed requests');
 
             return false;
 

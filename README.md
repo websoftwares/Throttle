@@ -1,5 +1,5 @@
 # Throttle
-Ban ip-address after certain amount of requests in a given timeframe.
+Ban identifier after certain amount of requests in a given timeframe.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/Throttle.png)](https://travis-ci.org/websoftwares/Throttle)
 
@@ -25,7 +25,7 @@ php composer.phar install
 ```
 
 ## Usage
-Basic usage of the `Throttle` class to ban an ip-address.
+Basic usage of the `Throttle` class to ban an identifier.
 
 ```php
 use Websoftwares\Throttle, Websoftwares\Storage\Memcached, Monolog\Logger;
@@ -35,7 +35,7 @@ $ip = $_SERVER["REMOTE_ADDR"];
 // Instantiate class
 $throttle = new Throttle(new Logger('throttle'), new Memcached());
 
-if($throttle->validate($ip)) {
+if($throttle->validate($identifier)) {
 	// Success proceed
 } else {
 	// Banned
@@ -58,12 +58,12 @@ don not store the failed request data into your database,
 this could lead to a DDOS attack and take your database down.
 
 ## Options
-U can override the default options by instantiating a `Throttle` class and pass in a _array_ as the third argument.
+U can override the default options by instantiating a `Throttle` class and pass in an _array_ as the third argument.
 
 ```php
 $options = array(
-	'banned' => 10, // Ban ip after 10 attempts. (default 5)
-	'logged' => 20, // Log ip after 20 attempts. (default 10)
+	'banned' => 10, // Ban identifier after 10 attempts. (default 5)
+	'logged' => 20, // Log identifier after 20 attempts. (default 10)
 	'timespan' => 60 // The timespan for the duration of the ban. (default 86400)
 	);
 
