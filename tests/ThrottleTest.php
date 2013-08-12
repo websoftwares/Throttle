@@ -15,8 +15,8 @@ class ThrottleTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $options = array(
-            'banned' => 10, // Ban ip after 10 attempts. (default 5)
-            'logged' => 20, // Log ip after 20 attempts. (default 10)
+            'banned' => 10, // Ban identifier after 10 attempts. (default 5)
+            'logged' => 20, // Log identifier after 20 attempts. (default 10)
             'timespan' => 10 // The timespan for the duration of the ban. (default 86400)
             );
         $this->throttle = new Throttle(new Logger('throttle'), new Memcached(),$options);
@@ -62,14 +62,6 @@ class ThrottleTest extends \PHPUnit_Framework_TestCase
     public function testValidateFails()
     {
         $this->throttle->validate();
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testValidateIpInvalidFails()
-    {
-        $this->throttle->validate('777.777');
     }
 
     /**

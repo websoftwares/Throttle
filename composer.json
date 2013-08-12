@@ -1,6 +1,6 @@
 {
     "name": "websoftwares/throttle",
-    "description": "Ban ip-adress after certain amount of requests in a given timeframe.",
+    "description": "Ban identifier after certain amount of requests in a given timeframe.",
     "license": "DBAD",
     "keywords": ["Throttle", "Brute Force", "Security", "Hammer", "Login", "Rate", "Limit", "Ip"],
     "authors": [

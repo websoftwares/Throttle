@@ -7,7 +7,7 @@ namespace Websoftwares\Storage;
  * @package Websoftwares
  * @subpackage Storage
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.1
+ * @version 0.2
  * @author Boris <boris@websoftwar.es>
  */
 class Memcached implements \Websoftwares\StorageInterface
@@ -40,35 +40,35 @@ class Memcached implements \Websoftwares\StorageInterface
     /**
      * save
      *
-     * @param $ip adress to save
-     * @param $amount the current amount
-     * @param $timespan the timespan in seconds
+     * @param mxied  $identifier identifier to save
+     * @param string $amount     the current amount
+     * @param string $timespan   the timespan in seconds
      *
      * @return boolean
      */
-    public function save($ip = null, $amount = null, $timespan =  null)
+    public function save($identifier = null, $amount = null, $timespan =  null)
     {
-        if (!$ip && !$amount && !$timespan) {
-            throw new \InvalidArgumentException('ip, amount and timespan are required');
+        if (!$identifier && !$amount && !$timespan) {
+            throw new \InvalidArgumentException('identifier, amount and timespan are required');
         }
 
-        return $this->memcached->set($this->fileName($ip), $amount, $timespan);
+        return $this->memcached->set($this->fileName($identifier), $amount, $timespan);
     }
 
     /**
      * increment
      *
-     * @param int $ip adress to increment the value for
+     * @param mixed $identifier adress to increment the value for
      *
      * @return boolean/int
      */
-    public function increment($ip = null)
+    public function increment($identifier = null)
     {
-        if (!$ip) {
-            throw new \InvalidArgumentException('ip is a required argument');
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
         }
 
-        return $this->memcached->increment($this->fileName($ip));
+        return $this->memcached->increment($this->fileName($identifier));
     }
 
     /**
