@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface, Websoftwares\StorageInterface;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.3
+ * @version 0.3.1
  * @author Boris <boris@websoftwar.es>
  */
 class Throttle
