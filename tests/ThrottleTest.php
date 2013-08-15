@@ -56,12 +56,28 @@ class ThrottleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->throttle->validate('127.0.0.11'));
     }
 
+    public function testResetSucceeds()
+    {
+        $identifier = "Lijpehackertje@169.168.0.1";
+        $this->assertTrue($this->throttle->validate($identifier));
+        $this->assertTrue($this->throttle->reset($identifier));
+        $this->assertFalse($this->throttle->reset($identifier));
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */
     public function testValidateFails()
     {
         $this->throttle->validate();
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testResetFails()
+    {
+        $this->throttle->reset();
     }
 
     /**

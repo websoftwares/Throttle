@@ -58,7 +58,7 @@ class Memcached implements \Websoftwares\StorageInterface
     /**
      * increment
      *
-     * @param mixed $identifier adress to increment the value for
+     * @param mixed $identifier identifier to increment the value for
      *
      * @return boolean/int
      */
@@ -69,6 +69,22 @@ class Memcached implements \Websoftwares\StorageInterface
         }
 
         return $this->memcached->increment($this->fileName($identifier));
+    }
+
+    /**
+     * delete
+     *
+     * @param mixed $identifier identifier to delete the entry for
+     *
+     * @return boolean
+     */
+    public function delete($identifier = null)
+    {
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+
+        return $this->memcached->delete($this->fileName($identifier));
     }
 
     /**

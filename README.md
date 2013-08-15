@@ -31,7 +31,7 @@ Basic usage of the `Throttle` class to ban an identifier.
 use Websoftwares\Throttle, Websoftwares\Storage\Memcached, Monolog\Logger;
 
 // Ip
-$ip = $_SERVER["REMOTE_ADDR"];
+$identifier = '$_SERVER["REMOTE_ADDR"]';
 // Instantiate class
 $throttle = new Throttle(new Logger('throttle'), new Memcached());
 
@@ -79,6 +79,13 @@ on Debian/Ubuntu systems for example install like this (requires administrative 
 
 ```
 sudo apt-get install php5-memcached
+```
+
+## reset();
+This will remove the identifier from the storage.
+*****
+```php
+$throttle->reset($identifier);
 ```
 
 ## Testing

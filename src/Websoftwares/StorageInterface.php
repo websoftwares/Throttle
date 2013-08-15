@@ -26,4 +26,11 @@ interface StorageInterface
      * @param mixed $identifier identifier to increment the value for
      */
     public function increment($identifier);
+
+    /**
+     * delete
+     *
+     * @param mixed $identifier identifier to delete the entry for
+     */
+    public function delete($identifier);
 }

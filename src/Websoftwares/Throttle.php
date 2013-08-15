@@ -93,4 +93,20 @@ class Throttle
         // Valid
         return true;
     }
+
+    /**
+     * reset
+     *
+     * @param  mixed   $identifier
+     * @return boolean
+     */
+    public function reset($identifier = null)
+    {
+        // No identifier
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+        // Removed the identifier from storage
+        return $this->storage->delete($identifier);
+    }
 }

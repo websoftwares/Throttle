@@ -46,12 +46,28 @@ class StorageMemcacheTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->getMethod('fileName')->invoke($this->memcached, '169.1.1.1'));
     }
 
+    public function testDeleteSucceeds()
+    {
+        $identifier = 'EliteLogin';
+        $this->assertTrue($this->memcached->save($identifier,1,1));
+        $this->assertTrue($this->memcached->delete($identifier));
+        $this->assertFalse($this->memcached->delete($identifier));
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */
     public function testSaveFails()
     {
         $this->memcached->save();
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testDeleteFails()
+    {
+        $this->memcached->delete();
     }
 
     /**
