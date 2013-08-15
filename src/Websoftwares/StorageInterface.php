@@ -6,7 +6,7 @@ namespace Websoftwares;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.2
+ * @version 0.3
  * @author boris <boris@websoftwar.es>
  */
 interface StorageInterface
