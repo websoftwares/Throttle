@@ -46,6 +46,27 @@ class StorageMemcacheTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->getMethod('fileName')->invoke($this->memcached, '169.1.1.1'));
     }
 
+    public function testUpdateSucceeds()
+    {
+        $identifier = 'Leethackertje';
+        // Save value expires 1 second
+        $this->assertTrue($this->memcached->save($identifier,1,1));
+        // Save value expires never
+        $this->assertTrue($this->memcached->update($identifier,2,0));
+        $expected = 2;
+        $actual = $this->memcached->get($identifier);
+        // Wait 2 seconds
+        sleep(2);
+        // See if value stays saved
+        $this->assertEquals($expected , $actual);
+        // Set expiration to 1 second
+        $this->assertTrue($this->memcached->update($identifier,2,1));
+        // Wait 2 seconds
+        sleep(2);
+        // Check if the key has expired
+        $this->assertFalse($this->memcached->get($identifier));
+    }
+
     public function testDeleteSucceeds()
     {
         $identifier = 'EliteLogin';
@@ -72,6 +93,14 @@ class StorageMemcacheTest extends \PHPUnit_Framework_TestCase
     public function testSaveFails()
     {
         $this->memcached->save();
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testUpdateFails()
+    {
+        $this->memcached->update();
     }
 
     /**

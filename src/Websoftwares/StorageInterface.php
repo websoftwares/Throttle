@@ -21,6 +21,15 @@ interface StorageInterface
     public function save($identifier, $amount, $timespan);
 
     /**
+     * update
+     *
+     * @param mixed $identifier identifier to update
+     * @param int   $amount     the current amount
+     * @param int   $timespan   the timespan in seconds
+    */
+    public function update($identifier, $amount, $timespan);
+
+    /**
      * increment
      *
      * @param mixed $identifier identifier to increment the value for

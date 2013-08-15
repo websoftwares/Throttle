@@ -56,6 +56,24 @@ class Memcached implements \Websoftwares\StorageInterface
     }
 
     /**
+     * update
+     *
+     * @param mxied  $identifier identifier to save
+     * @param string $amount     the current amount
+     * @param string $timespan   the timespan in seconds
+     *
+     * @return boolean
+     */
+    public function update($identifier = null, $amount = null, $timespan =  null)
+    {
+        if (!$identifier && !$amount && !$timespan) {
+            throw new \InvalidArgumentException('identifier, amount and timespan are required');
+        }
+
+        return $this->memcached->replace($this->fileName($identifier), $amount, $timespan);
+    }
+
+    /**
      * increment
      *
      * @param mixed $identifier identifier to increment the value for

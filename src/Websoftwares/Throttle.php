@@ -81,6 +81,9 @@ class Throttle
 
         // Logged
         } elseif ($attempts == $this->options['logged']) {
+            // Set expiration to zero (perm ban)
+            $this->storage->save($identifier, $attempts, 0);
+            // Log
             $this->logger->log('warning', $identifier . ' exceeded the number of allowed requests');
 
             return false;
