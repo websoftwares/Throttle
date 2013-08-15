@@ -7,7 +7,7 @@ namespace Websoftwares\Storage;
  * @package Websoftwares
  * @subpackage Storage
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.3
+ * @version 0.3.1
  * @author Boris <boris@websoftwar.es>
  */
 class Memcached implements \Websoftwares\StorageInterface
@@ -53,6 +53,24 @@ class Memcached implements \Websoftwares\StorageInterface
         }
 
         return $this->memcached->set($this->fileName($identifier), $amount, $timespan);
+    }
+
+    /**
+     * update
+     *
+     * @param mxied  $identifier identifier to save
+     * @param string $amount     the current amount
+     * @param string $timespan   the timespan in seconds
+     *
+     * @return boolean
+     */
+    public function update($identifier = null, $amount = null, $timespan =  null)
+    {
+        if (!$identifier && !$amount && !$timespan) {
+            throw new \InvalidArgumentException('identifier, amount and timespan are required');
+        }
+
+        return $this->memcached->replace($this->fileName($identifier), $amount, $timespan);
     }
 
     /**

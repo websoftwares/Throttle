@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface, Websoftwares\StorageInterface;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.3
+ * @version 0.3.1
  * @author Boris <boris@websoftwar.es>
  */
 class Throttle
@@ -81,6 +81,9 @@ class Throttle
 
         // Logged
         } elseif ($attempts == $this->options['logged']) {
+            // Set expiration to zero (perm ban)
+            $this->storage->save($identifier, $attempts, 0);
+            // Log
             $this->logger->log('warning', $identifier . ' exceeded the number of allowed requests');
 
             return false;
