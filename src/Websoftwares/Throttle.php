@@ -109,4 +109,23 @@ class Throttle
         // Removed the identifier from storage
         return $this->storage->delete($identifier);
     }
+
+    /**
+     * remaining
+     *
+     * @param  mixed $identifier
+     * @return int
+     */
+    public function remaining($identifier = null)
+    {
+        // No identifier
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+        // Get the value for identifier from storage
+        $current = (int) $this->storage->get($identifier);
+
+        // Return remaining attempts left before ban is set
+        return $this->options['banned'] - $current;
+    }
 }

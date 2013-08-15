@@ -88,6 +88,13 @@ This will remove the identifier from the storage.
 $throttle->reset($identifier);
 ```
 
+## remaining();
+This will return an integer that is the remaining attempt(s) available before identifier gets banned.
+*****
+```php
+$throttle->remaining($identifier);
+```
+
 ## Testing
 In the tests folder u can find several tests.
 

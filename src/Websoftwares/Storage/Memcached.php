@@ -72,6 +72,22 @@ class Memcached implements \Websoftwares\StorageInterface
     }
 
     /**
+     * get
+     *
+     * @param mixed $identifier identifier to retrieve the value from storage
+     *
+     * @return mixed boolean
+     */
+    public function get($identifier = null)
+    {
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+
+        return $this->memcached->get($this->fileName($identifier));
+    }
+
+    /**
      * delete
      *
      * @param mixed $identifier identifier to delete the entry for

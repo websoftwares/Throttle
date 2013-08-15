@@ -33,4 +33,11 @@ interface StorageInterface
      * @param mixed $identifier identifier to delete the entry for
      */
     public function delete($identifier);
+
+    /**
+     * get
+     *
+     * @param mixed $identifier identifier to retrieve the value from storage
+     */
+    public function get($identifier);
 }
