@@ -7,7 +7,7 @@ namespace Websoftwares\Storage;
  * @package Websoftwares
  * @subpackage Storage
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.3.1
+ * @version 0.3.2
  * @author Boris <boris@websoftwar.es>
  */
 class Memcached implements \Websoftwares\StorageInterface
