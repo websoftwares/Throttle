@@ -1,4 +1,4 @@
-# Throttle (v0.3.1)
+# Throttle (v0.3.2)
 Ban identifier after certain amount of requests in a given timeframe.
 
 [![Build Status](https://api.travis-ci.org/websoftwares/Throttle.png)](https://travis-ci.org/websoftwares/Throttle)
@@ -83,14 +83,12 @@ sudo apt-get install php5-memcached
 
 ## reset();
 This will remove the identifier from the storage.
-*****
 ```php
 $throttle->reset($identifier);
 ```
 
 ## remaining();
 This will return an integer that is the remaining attempt(s) available before identifier gets banned.
-*****
 ```php
 $throttle->remaining($identifier);
 ```
