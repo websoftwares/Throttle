@@ -7,7 +7,7 @@ namespace Websoftwares\Storage;
  * @package Websoftwares
  * @subpackage Storage
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.2
+ * @version 0.3
  * @author Boris <boris@websoftwar.es>
  */
 class Memcached implements \Websoftwares\StorageInterface
@@ -58,7 +58,7 @@ class Memcached implements \Websoftwares\StorageInterface
     /**
      * increment
      *
-     * @param mixed $identifier adress to increment the value for
+     * @param mixed $identifier identifier to increment the value for
      *
      * @return boolean/int
      */
@@ -69,6 +69,38 @@ class Memcached implements \Websoftwares\StorageInterface
         }
 
         return $this->memcached->increment($this->fileName($identifier));
+    }
+
+    /**
+     * get
+     *
+     * @param mixed $identifier identifier to retrieve the value from storage
+     *
+     * @return mixed boolean
+     */
+    public function get($identifier = null)
+    {
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+
+        return $this->memcached->get($this->fileName($identifier));
+    }
+
+    /**
+     * delete
+     *
+     * @param mixed $identifier identifier to delete the entry for
+     *
+     * @return boolean
+     */
+    public function delete($identifier = null)
+    {
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+
+        return $this->memcached->delete($this->fileName($identifier));
     }
 
     /**

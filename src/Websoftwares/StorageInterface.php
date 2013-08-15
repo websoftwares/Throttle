@@ -6,7 +6,7 @@ namespace Websoftwares;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.2
+ * @version 0.3
  * @author boris <boris@websoftwar.es>
  */
 interface StorageInterface
@@ -26,4 +26,18 @@ interface StorageInterface
      * @param mixed $identifier identifier to increment the value for
      */
     public function increment($identifier);
+
+    /**
+     * delete
+     *
+     * @param mixed $identifier identifier to delete the entry for
+     */
+    public function delete($identifier);
+
+    /**
+     * get
+     *
+     * @param mixed $identifier identifier to retrieve the value from storage
+     */
+    public function get($identifier);
 }

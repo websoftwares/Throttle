@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface, Websoftwares\StorageInterface;
  *
  * @package Websoftwares
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.2
+ * @version 0.3
  * @author Boris <boris@websoftwar.es>
  */
 class Throttle
@@ -92,5 +92,40 @@ class Throttle
 
         // Valid
         return true;
+    }
+
+    /**
+     * reset
+     *
+     * @param  mixed   $identifier
+     * @return boolean
+     */
+    public function reset($identifier = null)
+    {
+        // No identifier
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+        // Removed the identifier from storage
+        return $this->storage->delete($identifier);
+    }
+
+    /**
+     * remaining
+     *
+     * @param  mixed $identifier
+     * @return int
+     */
+    public function remaining($identifier = null)
+    {
+        // No identifier
+        if (!$identifier) {
+            throw new \InvalidArgumentException('identifier is a required argument');
+        }
+        // Get the value for identifier from storage
+        $current = (int) $this->storage->get($identifier);
+
+        // Return remaining attempts left before ban is set
+        return $this->options['banned'] - $current;
     }
 }

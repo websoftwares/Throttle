@@ -56,12 +56,46 @@ class ThrottleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->throttle->validate('127.0.0.11'));
     }
 
+    public function testResetSucceeds()
+    {
+        $identifier = "Lijpehackertje@169.168.0.1";
+        $this->assertTrue($this->throttle->validate($identifier));
+        $this->assertTrue($this->throttle->reset($identifier));
+        $this->assertFalse($this->throttle->reset($identifier));
+    }
+
+    public function testRemainingSucceeds()
+    {
+        $identifier = "Lijpehackertje@169.168.0.1";
+        $this->assertTrue($this->throttle->validate($identifier));
+        $actual = $this->throttle->remaining($identifier);
+        $this->assertEquals(9, $actual);
+        $this->assertInternalType('int', $actual);
+        $this->assertInternalType('int',  $this->throttle->remaining('NotFound'));
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */
     public function testValidateFails()
     {
         $this->throttle->validate();
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testResetFails()
+    {
+        $this->throttle->reset();
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testRemainingFails()
+    {
+        $this->throttle->remaining();
     }
 
     /**
