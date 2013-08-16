@@ -72,6 +72,18 @@ $throttle = new Throttle(new Logger('throttle'), new Memcached(), $options);
 
 ```
 
+## `reset();`
+This will remove the identifier from the storage.
+```php
+$throttle->reset($identifier);
+```
+
+## `remaining();`
+This will return an integer that is the remaining attempt(s) available before identifier gets banned.
+```php
+$throttle->remaining($identifier);
+```
+
 ## Memcached
 This requires u have the PHP memcached extension installed.
 
@@ -79,18 +91,6 @@ on Debian/Ubuntu systems for example install like this (requires administrative 
 
 ```
 sudo apt-get install php5-memcached
-```
-
-## reset();
-This will remove the identifier from the storage.
-```php
-$throttle->reset($identifier);
-```
-
-## remaining();
-This will return an integer that is the remaining attempt(s) available before identifier gets banned.
-```php
-$throttle->remaining($identifier);
 ```
 
 ## Testing

@@ -7,7 +7,7 @@ namespace Websoftwares\Storage;
  * @package Websoftwares
  * @subpackage Storage
  * @license http://www.dbad-license.org/ DbaD
- * @version 0.3.2
+ * @version 0.3.3
  * @author Boris <boris@websoftwar.es>
  */
 class Memcached implements \Websoftwares\StorageInterface
@@ -40,7 +40,7 @@ class Memcached implements \Websoftwares\StorageInterface
     /**
      * save
      *
-     * @param mxied  $identifier identifier to save
+     * @param mixed  $identifier identifier to save
      * @param string $amount     the current amount
      * @param string $timespan   the timespan in seconds
      *
@@ -58,7 +58,7 @@ class Memcached implements \Websoftwares\StorageInterface
     /**
      * update
      *
-     * @param mxied  $identifier identifier to save
+     * @param mixed  $identifier identifier to save
      * @param string $amount     the current amount
      * @param string $timespan   the timespan in seconds
      *
